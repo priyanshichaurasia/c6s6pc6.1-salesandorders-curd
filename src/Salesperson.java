@@ -43,6 +43,6 @@ public class Salesperson {
 
     @Override
     public String toString(){
-        return (salesId +" "+ firstName +" " + city +" " + commisionRate);
+        return (salesId +","+ firstName +"," + city +"," + commisionRate);
     }
 }

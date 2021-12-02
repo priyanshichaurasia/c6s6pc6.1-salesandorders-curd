@@ -58,6 +58,6 @@ public class Customer {
         this.city = city;
     }
     public String toString(){
-        return (customerId +" "+ name +" "+ lastName +" "+ city +" "+ rating +" "+ salesId);
+        return (customerId +","+ name +","+ lastName +","+ city +","+ rating +","+ salesId);
     }
 }
