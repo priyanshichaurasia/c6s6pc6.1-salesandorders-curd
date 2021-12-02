@@ -20,17 +20,18 @@ public class Main {
                 150,1111);
         boolean addcust = dbo.addCustomer(cust);
         System.out.println("\nCustomer Added " +addcust);
-        java.util.Date dt = new SimpleDateFormat("yyyy-mm-dd").parse("2020-05-15");
-        Orders ord2 = new Orders(12365, 3000, dt, cust.getCustomerId());
-        boolean addorder = dbo.addOrders(ord2);
 
-        Customer cust1 = dbo.getCustomerByName("Samuel");
-        if(cust1==null) {
-            System.out.println("Customer found ");
+        java.util.Date dt = new SimpleDateFormat("yyyy-mm-dd").parse("2020-05-15");
+        Orders ord = new Orders(12365, 3000, dt, cust.getCustomerId());
+        boolean addorder = dbo.addOrders(ord);
+
+        Orders ord2= dbo.getOrderById(ord.getOrderId());
+        if(ord2==null) {
+            System.out.println("Data Not found ");
         }
         else{
-            ord2.setAmount(3500);
-            boolean result1 = dbo.update(ord2);
+            ord.setAmount(3500);
+            boolean result1 = dbo.update(ord);
                 if(result1==true){
                     System.out.println("updated");
                 }

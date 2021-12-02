@@ -127,28 +127,26 @@ public class DbOperations {
         }
         return result;
     }
-       public Customer getCustomerByName(String name){
-           Customer cust = null;
-           try {
-               Class.forName("com.mysql.cj.jdbc.Driver");
-               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CarsSalesData", "root",
-                       "root");
-               String query = "insert into customer values where name = ?";
-               PreparedStatement ps = con.prepareStatement(query);
-               ps.setString(1,name);
-               ResultSet rs = ps.executeQuery();
-               if(rs.next()){
-                   cust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3),
-                           rs.getString(4), rs.getInt(5), rs.getInt(6));
-               }
-               ps.close();
-               con.close();
-           }
-           catch (Exception ex){
-               System.out.println(ex);
-           }
-           return cust;
-       }
+
+    public Orders getOrderById(int id){
+        Orders or=null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CarsSalesData", "root",
+                    "root");
+            String query = "select * from orders where orderid =?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                or=new Orders(rs.getInt(1),rs.getInt(2),rs.getDate(3),rs.getInt(4));
+            }
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
+        return or;
+    }
 
        public boolean update(Orders or) {
            boolean result = false;
@@ -156,11 +154,12 @@ public class DbOperations {
                Class.forName("com.mysql.cj.jdbc.Driver");
                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CarsSalesData", "root",
                        "root");
-               String query = "update orders set orderId = ?, amount = ?, orderDate = ?, where customerId = ?";
+               String query = "update orders set amount = ?, orderDate = ?, customerId = ? where orderId = ?";
                PreparedStatement ps = con.prepareStatement(query);
-               ps.setInt(1, or.getOrderId());
-               ps.setInt(2, or.getAmount());
-               ps.setDate(3, new java.sql.Date(new java.util.Date().getTime()));
+               ps.setInt(1, or.getAmount());
+               ps.setDate(2, new java.sql.Date(new java.util.Date().getTime()));
+               ps.setInt(3,or.getCustomerId());
+               ps.setInt(4, or.getOrderId());
                int res = ps.executeUpdate();
                if (res != 0) {
                    result = true;
