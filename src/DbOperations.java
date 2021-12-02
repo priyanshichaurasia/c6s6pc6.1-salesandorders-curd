@@ -54,7 +54,7 @@ public class DbOperations {
         return result;
     }
 
-    public boolean removeSalesperson(int salesId){
+    public boolean removeSalesperson(String firstName){
         boolean result = true;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -62,7 +62,7 @@ public class DbOperations {
                     "root", "root");
             String query = "delete from salesperson where salesId = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,salesId);
+            ps.setString(1,firstName);
             int res = ps.executeUpdate();
             if(res==1){
                 result = true;

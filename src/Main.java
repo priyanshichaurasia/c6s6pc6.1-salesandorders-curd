@@ -9,9 +9,9 @@ public class Main {
 
         Salesperson sp = new Salesperson(1111,"John Kenov", "Nordic", 26);
         boolean result = dbo.addSalesperson(sp);
-        System.out.println("\n new salesperson record inserted" +result);
+        System.out.println("\n new salesperson record inserted " +result);
 
-        boolean remove = dbo.removeSalesperson(1111);
+        boolean remove = dbo.removeSalesperson("axelrod");
         System.out.println("\n Salesperson is removed " +remove);
     }
 }
